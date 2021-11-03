@@ -28,7 +28,7 @@ sudo firewall-cmd --zone=public --permanent --add-port=443/tcp
 
 Host Only Network ID: 192.168.4.0/24
 
-Bridged Network ID: 192.168.0.0/24
+Bridged Network ID: 192.168.1.0/24
 
 ### On Bridged Host:
 
