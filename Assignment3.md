@@ -49,6 +49,34 @@ sysctl -p
 ```
 
 ```bash
+firewall-cmd —permanent —direct —add-rule ipv4 nat POSTROUTING O -o eth0 -j MASQUERADE
+```
+
+```bash
+firewall-cmd —permanent —direct —add-rule ipv4 filter FORWARD O -i eth0 eth1 -j ACCEPT
+```
+
+```bash
+firewall-cmd —permanent —direct —add-rule ipv4 filter FORWARD O -i eth1 eth0 -m state —state RELATED,ESTABLISHED -j ACCEPT
+```
+
+```bash
+
+```
+
+### Alternative:
+
+(trying with DNAT and SNAT )
+
+```bash
 sudo iptables --append PREROUTING --table nat --protocol tcp --destination 192.168.4.12 --jump DNAT --to-destination 192.168.0.12
 sudo iptables --append POSTROUTING --table nat --protocol tcp --destination 192.168.0.10  --jump SNAT --to-source 192.168.4.12
+```
+
+### On the network machines:
+
+Change the default gateway to the server machine.
+
+```bash
+sudo route add default gw 192.168.1.12 eth0
 ```
